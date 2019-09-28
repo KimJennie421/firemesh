@@ -1,18 +1,29 @@
 import { Injectable } from "@angular/core";
 import * as firebase from 'firebase/app';
+import { AngularFirestore } from '@angular/fire/firestore';
+
 
 @Injectable()
 export class AuthenticateService {
 
-    constructor(){}
+    constructor( public db: AngularFirestore ) {}
 
-    registerUser(value){
+    registerUser(value, userName, ocupacion){
         return new Promise<any>((resolve, reject) => {
             firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
                 .then(
-                    res => resolve(res),
-                    err => reject(err))
-        })
+                    res => {
+                        const uid = res.user.uid;
+                        this.db.collection('users').doc(uid).set({
+                            uid: uid,
+                            nombre: userName,
+                            ocupacion: ocupacion
+
+                        });
+                        resolve(res);
+                    },
+                    err => reject(err));
+                });
     }
 
     loginUser(value){
@@ -20,8 +31,8 @@ export class AuthenticateService {
             firebase.auth().signInWithEmailAndPassword(value.email, value.password)
                 .then(
                     res => resolve(res),
-                    err => reject(err))
-        })
+                    err => reject(err));
+        });
     }
 
     logoutUser(){
@@ -29,7 +40,7 @@ export class AuthenticateService {
             if(firebase.auth().currentUser){
                 firebase.auth().signOut()
                     .then(() => {
-                        console.log("LOG Out");
+                        console.log("Log Out");
                         resolve();
                     }).catch((error) => {
                     reject();
@@ -38,7 +49,7 @@ export class AuthenticateService {
         })
     }
 
-    userDetails(){
+    userDetails() {
         return firebase.auth().currentUser;
     }
 }

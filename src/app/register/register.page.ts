@@ -15,6 +15,9 @@ export class RegisterPage implements OnInit {
     errorMessage: string = '';
     successMessage: string = '';
 
+    userName: string;
+    ocupacion: string;
+
     validation_messages = {
         'email': [
             { type: 'required', message: 'Email is required.' },
@@ -46,7 +49,7 @@ export class RegisterPage implements OnInit {
     }
 
     tryRegister(value){
-        this.authService.registerUser(value)
+        this.authService.registerUser(value, this.userName, this.ocupacion)
             .then(res => {
                 console.log(res);
                 this.errorMessage = "";

@@ -5,6 +5,18 @@
 </ion-header>
 
 <ion-content padding>
+    <ion-list>
+        <ion-item>
+            <ion-label position="floating">Nombre y apellido</ion-label>
+            <ion-input type="text" name="userName" [(ngModel)]="userName" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating">Ocupacion</ion-label>
+            <ion-input type="text" name="userName" [(ngModel)]="ocupacion"></ion-input>
+        </ion-item>
+    </ion-list>
+
     <form class="form" [formGroup]="validations_form" (ngSubmit)="tryRegister(validations_form.value)">
 
         <ion-item>
@@ -13,8 +25,7 @@
         </ion-item>
         <div class="validation-errors">
             <ng-container *ngFor="let validation of validation_messages.email">
-                <div class="error-message"
-                     *ngIf="validations_form.get('email').hasError(validation.type) && (validations_form.get('email').dirty || validations_form.get('email').touched)">
+                <div class="error-message" *ngIf="validations_form.get('email').hasError(validation.type) && (validations_form.get('email').dirty || validations_form.get('email').touched)">
                     {{ validation.message }}
                 </div>
             </ng-container>
@@ -26,8 +37,7 @@
         </ion-item>
         <div class="validation-errors">
             <ng-container *ngFor="let validation of validation_messages.password">
-                <div class="error-message"
-                     *ngIf="validations_form.get('password').hasError(validation.type) && (validations_form.get('password').dirty || validations_form.get('password').touched)">
+                <div class="error-message" *ngIf="validations_form.get('password').hasError(validation.type) && (validations_form.get('password').dirty || validations_form.get('password').touched)">
                     {{ validation.message }}
                 </div>
             </ng-container>
