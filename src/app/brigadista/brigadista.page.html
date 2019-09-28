@@ -1,8 +1,24 @@
 <ion-header>
   
   <ion-toolbar>
-    <ion-title>Ubicaciones</ion-title>
-
+      <div class="row">
+          <div class="col-8">
+              <ion-title>Perfil </ion-title>
+          </div>
+          <div class="col-4">
+              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                  <label class="btn btn-secondary active">
+                    <input type="radio" name="options" id="option1" autocomplete="off" checked> Mapa
+                  </label>
+                  <label class="btn btn-secondary">
+                    <input type="radio" name="options" id="option2" autocomplete="off"> Registro
+                  </label>
+                  <label class="btn btn-secondary">
+                    <input type="radio" name="options" id="option3" autocomplete="off"> Logout
+                  </label>
+                </div>
+          </div>
+        </div>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -11,14 +27,15 @@
          
         <div class="row">
             <div class="col-3">
-                <img src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1100&q=80 " class="img-thumbnail">
+                <img src="https://image.flaticon.com/icons/svg/149/149071.svg">
+                
             </div>
             <div class="col-9">
-              <h3>Nombre</h3> 
-              <h3>Brigadista</h3>
+              <h4>Nombre</h4> 
+              <h4>Brigadista</h4>
             </div>
           </div>
-        </div>     
+        </div>
           <table class="table">
 
               <tbody>
@@ -26,19 +43,16 @@
                   <th scope="row"></th>
                   <td>Mark</td>
                   <td>Otto</td>
-                  <td>@mdo</td>
                 </tr>
                 <tr>
                   <th scope="row"></th>
                   <td>Jacob</td>
                   <td>Thornton</td>
-                  <td>@fat</td>
                 </tr>
                 <tr>
                   <th scope="row"></th>
                   <td>Larry</td>
                   <td>the Bird</td>
-                  <td>@twitter</td>
                 </tr>
               </tbody>
             </table>
