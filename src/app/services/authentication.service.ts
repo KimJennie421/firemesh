@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import * as firebase from 'firebase/app';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 
 @Injectable()
@@ -51,5 +52,9 @@ export class AuthenticateService {
 
     userDetails() {
         return firebase.auth().currentUser;
+    }
+
+    getUserInfo(uid: any): Observable<any[]> {
+        return this.db.collection('users', ref => ref.where("uid", "==", uid)).valueChanges();
     }
 }

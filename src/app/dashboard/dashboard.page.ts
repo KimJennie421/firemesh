@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {NavController, ModalController} from '@ionic/angular';
 import {AuthenticateService} from '../services/authentication.service';
+import { Router, ActivatedRoute } from '@angular/router';
+
 
 @Component({
     selector: 'app-dashboard',
@@ -14,7 +16,8 @@ export class DashboardPage implements OnInit {
 
     constructor(
         private navCtrl: NavController,
-        private authService: AuthenticateService
+        private authService: AuthenticateService,
+        public router: Router
     ) {
     }
 
@@ -36,5 +39,17 @@ export class DashboardPage implements OnInit {
             .catch(error => {
                 console.log(error);
             })
+    }
+
+    verPerfil() {
+        let uid = this.authService.userDetails();
+        let user: any;
+
+        this.authService.getUserInfo(uid.uid).subscribe(usuarios => {
+            console.log(usuarios[0]);
+            user = usuarios[0];
+            this.router.navigate(['/brigadista'], {state: {user: user}} );
+        });
+
     }
 }

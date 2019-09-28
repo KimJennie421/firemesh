@@ -16,6 +16,7 @@ import * as firebase from 'firebase';
 import {ReactiveFormsModule} from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 
 
@@ -34,6 +35,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
         StatusBar,
         SplashScreen,
         AuthenticateService,
+        Geolocation,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
     ],
     bootstrap: [AppComponent]
