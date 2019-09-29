@@ -57,4 +57,14 @@ export class AuthenticateService {
     getUserInfo(uid: any): Observable<any[]> {
         return this.db.collection('users', ref => ref.where("uid", "==", uid)).valueChanges();
     }
+
+    sendPosition(lat, lng){
+        return new Promise<any>((resolve, reject) => {
+            let uid = this.userDetails().uid;
+            this.db.collection('users').doc(uid).update({
+                lat: lat,
+                lng: lng
+            });
+        });
+    }
 }

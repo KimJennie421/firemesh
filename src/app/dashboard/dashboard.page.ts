@@ -18,7 +18,6 @@ export class DashboardPage implements OnInit {
         static: true
     }) mapElement: ElementRef;
 
-    isTracking: boolean;
     latitude;
     longitude;
     map;
@@ -39,22 +38,6 @@ export class DashboardPage implements OnInit {
         } else {
             this.navCtrl.navigateBack('');
         }
-
-        navigator.geolocation.getCurrentPosition((position) => {
-
-            this.map = new google.maps.Map(
-                this.mapElement.nativeElement,
-                {
-                center: {lat: position.coords.latitude, lng: position.coords.longitude},
-                zoom: 15
-            });
-
-            this.marker = new google.maps.Marker({
-                position: {lat: this.latitude, lng: this.longitude},
-                map: this.map,
-                title: 'Got you!'
-            });
-        });
 
     }
 
@@ -79,6 +62,38 @@ export class DashboardPage implements OnInit {
             this.router.navigate(['/brigadista'], {state: {user: user}} );
         });
 
+    }
+
+    showLocation() {
+        navigator.geolocation.getCurrentPosition((position) => {
+            this.latitude = position.coords.latitude;
+            this.longitude = position.coords.longitude;
+
+            this.authService.sendPosition(this.latitude, this.longitude);
+
+            let uid = this.authService.userDetails();
+            let user: any;
+
+            this.authService.getUserInfo(uid.uid).subscribe(usuarios => {
+                console.log(usuarios[0]);
+                user = usuarios[0];
+
+                this.map = new google.maps.Map(
+                    this.mapElement.nativeElement,
+                    {
+                    center: {lat: parseFloat(user.lat), lng: parseFloat(user.lng)},
+                    zoom: 15
+                });
+
+                this.marker = new google.maps.Marker({
+                    position: {lat: parseFloat(user.lat), lng: parseFloat(user.lng)},
+                    map: this.map,
+                    title: 'Got you!'
+                });
+
+            });
+
+        });
     }
 
 }
