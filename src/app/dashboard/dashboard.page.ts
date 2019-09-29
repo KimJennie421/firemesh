@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {NavController, ModalController} from '@ionic/angular';
+import {Component, OnInit, ViewChild, AfterContentInit} from '@angular/core';
+import {NavController} from '@ionic/angular';
 import {AuthenticateService} from '../services/authentication.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+declare var google;
 
 
 @Component({
@@ -9,9 +10,14 @@ import { Router, ActivatedRoute } from '@angular/router';
     templateUrl: './dashboard.page.html',
     styleUrls: ['./dashboard.page.scss'],
 })
-export class DashboardPage implements OnInit {
+export class DashboardPage implements OnInit, AfterContentInit {
 
 
+    @ViewChild('mapElement', {
+        static: true
+    }) mapElement;
+
+    map;
     userEmail: string;
 
     constructor(
@@ -51,5 +57,14 @@ export class DashboardPage implements OnInit {
             this.router.navigate(['/brigadista'], {state: {user: user}} );
         });
 
+    }
+
+    ngAfterContentInit(): void {
+        this.map = new google.maps.Map(
+            this.mapElement.nativeElement,
+            {
+                center: {lat: -34.397, lng: 150.644},
+                zoom: 10
+        });
     }
 }

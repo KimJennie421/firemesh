@@ -2,16 +2,20 @@
     <ion-toolbar>
         <ion-title>Dashboard</ion-title>
     </ion-toolbar>
+    <ion-buttons slot="end">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons" (click)="logout()">
+            <label class="btn btn-secondary">
+              <input type="radio" name="options" id="option3" autocomplete="off"> Logout
+            </label>
+        </div>
+    </ion-buttons>
 </ion-header>
 
 <ion-content padding>
 
     <ion-button (click)="verPerfil()">Ver perfil</ion-button>
 
+    <div #mapElement class="map"></div>
+
 
 </ion-content>
-<ion-footer (click)="logout()">
-    <ion-toolbar color="secondary">
-        <ion-title>Log out</ion-title>
-    </ion-toolbar>
-</ion-footer>
