@@ -18,7 +18,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
-
+firebase.initializeApp(environment.firebase);
 
 @NgModule({
     declarations: [AppComponent],
