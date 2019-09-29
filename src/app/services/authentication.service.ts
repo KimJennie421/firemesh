@@ -67,4 +67,8 @@ export class AuthenticateService {
             });
         });
     }
+
+    getAllUsers(): Observable<any[]> {
+        return this.db.collection('users').valueChanges();
+    }
 }

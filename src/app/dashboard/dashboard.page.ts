@@ -11,7 +11,7 @@ declare var google;
     templateUrl: './dashboard.page.html',
     styleUrls: ['./dashboard.page.scss'],
 })
-export class DashboardPage implements OnInit {
+export class DashboardPage implements OnInit, AfterContentInit {
 
 
     @ViewChild('mapElement', {
@@ -23,6 +23,8 @@ export class DashboardPage implements OnInit {
     map;
     userEmail: string;
     marker;
+
+    users: any[];
 
     constructor(
         private navCtrl: NavController,
@@ -38,6 +40,24 @@ export class DashboardPage implements OnInit {
         } else {
             this.navCtrl.navigateBack('');
         }
+
+        this.authService.getAllUsers().subscribe(users => {
+            this.users = users;
+            console.log(this.users);
+
+            let marker, i;
+            for( i = 0; i < users.length; i++) {
+                marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(users[i].lat, users[i].lng),
+                    map: this.map
+               });
+            }
+        });
+
+    }
+
+    ngAfterContentInit() {
+        this.showLocation();
 
     }
 
@@ -62,6 +82,15 @@ export class DashboardPage implements OnInit {
             this.router.navigate(['/brigadista'], {state: {user: user}} );
         });
 
+    }
+
+    verOtroUsuario(uid){
+        let user: any;
+        this.authService.getUserInfo(uid).subscribe(usuarios => {
+            console.log(usuarios[0]);
+            user = usuarios[0];
+            this.router.navigate(['/brigadista'], {state: {user: user}} );
+        });
     }
 
     showLocation() {
@@ -95,5 +124,6 @@ export class DashboardPage implements OnInit {
 
         });
     }
+
 
 }
