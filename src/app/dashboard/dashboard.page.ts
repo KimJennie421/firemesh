@@ -43,15 +43,6 @@ export class DashboardPage implements OnInit, AfterContentInit {
 
         this.authService.getAllUsers().subscribe(users => {
             this.users = users;
-            console.log(this.users);
-
-            let marker, i;
-            for( i = 0; i < users.length; i++) {
-                marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(users[i].lat, users[i].lng),
-                    map: this.map
-               });
-            }
         });
 
     }
@@ -77,7 +68,6 @@ export class DashboardPage implements OnInit, AfterContentInit {
         let user: any;
 
         this.authService.getUserInfo(uid.uid).subscribe(usuarios => {
-            console.log(usuarios[0]);
             user = usuarios[0];
             this.router.navigate(['/brigadista'], {state: {user: user}} );
         });
@@ -87,7 +77,6 @@ export class DashboardPage implements OnInit, AfterContentInit {
     verOtroUsuario(uid){
         let user: any;
         this.authService.getUserInfo(uid).subscribe(usuarios => {
-            console.log(usuarios[0]);
             user = usuarios[0];
             this.router.navigate(['/brigadista'], {state: {user: user}} );
         });
@@ -104,7 +93,6 @@ export class DashboardPage implements OnInit, AfterContentInit {
             let user: any;
 
             this.authService.getUserInfo(uid.uid).subscribe(usuarios => {
-                console.log(usuarios[0]);
                 user = usuarios[0];
 
                 this.map = new google.maps.Map(
