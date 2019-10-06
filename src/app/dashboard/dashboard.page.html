@@ -1,14 +1,10 @@
 <ion-header>
     <ion-toolbar>
         <ion-title>Dashboard</ion-title>
+        <ion-buttons slot="end">
+        <ion-button (click)="logout()">Cerrar sesion</ion-button>
+        </ion-buttons>
     </ion-toolbar>
-    <ion-buttons slot="end">
-        <div class="btn-group btn-group-toggle" data-toggle="buttons" (click)="logout()">
-            <label class="btn btn-secondary">
-              <input type="radio" name="options" id="option3" autocomplete="off"> Logout
-            </label>
-        </div>
-    </ion-buttons>
 </ion-header>
 
 <ion-content padding>
